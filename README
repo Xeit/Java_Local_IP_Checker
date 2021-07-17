@@ -1,0 +1,7 @@
+This is program to check every local IP in your network.
+
+It uses 7 threads (+main so 8) to check every single 192.168.X.X IP.
+
+I used it to get IP of my device without acces to router.
+
+Made by: Piotr "Xeit" Lisowski
