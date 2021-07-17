@@ -5,9 +5,10 @@ import java.util.Collections.*;
 
 public class Pinger
 {
+    //Synchronized list for saving IP addresses
     public static List<String> ipList = Collections.synchronizedList(new ArrayList<>());
 
-
+    //Function for reciving local IP of device 
     public static String getLocalIp()
     {
         String ip = "";
@@ -42,8 +43,10 @@ public class Pinger
         return("AAA");
     }
     
+
     public static boolean checkEverything()
     {
+        // Creation of Threads
         Integer x = 0;
         Thread first = new Thread(new ThreadPinger(0));
         Thread second = new Thread(new ThreadPinger(0));
@@ -53,6 +56,7 @@ public class Pinger
         Thread sixth = new Thread(new ThreadPinger(0));
         Thread seventh = new Thread(new ThreadPinger(0));
         Thread eighth = new Thread(new ThreadPinger(0));
+        //Loop for restarting and feeding Threads with new sets of IP to check, every time it ends.
         while(x < 256 || first.isAlive() || second.isAlive() || third.isAlive() || forth.isAlive() || fifth.isAlive() || sixth.isAlive() || seventh.isAlive())
         {
             if(!first.isAlive() && x < 256)
@@ -111,20 +115,20 @@ public class Pinger
 
     public static void main(String[] args) throws InterruptedException
     {
+        //Getting local IP
         String ip = getLocalIp();
         if(ip.equals("AAA"))
         {
             System.out.println("Cannot get local IP.");
             return;
         }
+        //Checking every local IP
         checkEverything();
 
-       System.out.println("Main still works");
-       Thread.sleep(500);
-
-       for(String string : ipList)
-       {
-           System.out.println(string);
-       }
+        //Printing out IP that are occupied.
+        for(String string : ipList)
+        {
+            System.out.println(string);
+        }
     }
 }
